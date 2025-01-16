@@ -6,34 +6,21 @@
   become: true
   tasks:
 
-  - name: update repository index
-    yum:
-      update_cache: yes
 
-    when: ansible_distribution == "CentOS"
   - name: install apache2 package
     yum:
-      name: httpd
+      name: 
+        - httpd
+        - php  
       state: latest
-    when: ansible_distribution == "CentOS"
-  - name: install support for php
-    yum:
-      name: php
-      state: latest
+      update_cache: yes  
     when: ansible_distribution == "CentOS"
 
-  - name: update repository index
-    apt:
-      update_cache: yes
-
-    when: ansible_distribution == "Ubuntu"
   - name: install apache2 package
     apt:
-      name: apache2
+      name: 
+        - apache2
+        - php  
       state: latest
-    when: ansible_distribution == "Ubuntu"
-  - name: install support for php
-    apt:
-      name: php
-      state: latest
+      update_cache: yes  
     when: ansible_distribution == "Ubuntu"
